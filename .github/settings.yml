@@ -19,7 +19,7 @@ repository:
   # Comma-separated, at most 20. Each topic: lowercase letters, digits,
   # and hyphens, starting with a letter or digit, at most 50 characters.
   topics: >-
-    apriltag, fiducial-markers, computer-vision, robotics, agent-skills,
+    apriltag, fiducial-markers, computer-vision, robotics, svg, agent-skills,
     claude-code
 
   # This repository is not a template for others to copy.
