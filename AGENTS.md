@@ -8,14 +8,28 @@ file is the single source of instructions; edit it, never an adapter file.
 AprilTag-imgs (fork): an unofficial fork of
 [AprilRobotics/apriltag-imgs](https://github.com/AprilRobotics/apriltag-imgs),
 which holds pre-generated images of every AprilTag 3 tag family. The fork adds
-agent instructions, agent skills, and documentation; the tag images and the
-upstream script are unchanged.
+agent instructions, agent skills, documentation, and SVG archives of every
+tag; the tag images and the upstream script are unchanged.
 
 - `tag<Family>/`: one directory per tag family, each holding one PNG per tag
   (`tag<bits>_<hamming>_<id>.png`, 8 to 11 pixels wide), a `mosaic.png`, and an
   `alltags.ps` PostScript sheet. About 159,000 PNG files in total: never list
   these directories recursively or read them in full; count or sample them.
 - `tag_to_svg.py`: converts one tag PNG into an SVG (Python 3 and Pillow).
+- `scripts/tags_to_svg.py`: the fork's batch converter. It imports
+  `tag_to_svg.py` and writes every tag of every family as an SVG, sized per
+  cell (`--cell`, default 2mm, so a 10 x 10 tag is 20mm wide).
+- `svg/<Family>.tar.gz`: tracked, reproducible archives of those SVGs
+  (entries `<Family>/<name>.svg`), built at the default `--cell=2mm`, which
+  the README size table documents. Regenerate them with the batch converter
+  after any change to the tags or `tag_to_svg.py`; build other sizes into
+  another `--out` directory. Rerunning with the same inputs, Python, and
+  zlib build gives byte-identical archives; another zlib build (for example
+  zlib-ng) may change the compressed bytes, not the SVGs.
+- `svg/<Family>/`: the loose SVGs, git-ignored, about 159,000 files and
+  1.4 GiB in total: same rule as the tag directories, never list or read them
+  in full. They hold whatever the last run that wrote loose files produced
+  (`--no-files` leaves them as they were); the script never deletes them.
 
 ## Commands
 
@@ -23,6 +37,12 @@ There is no build and no test suite.
 
 - Convert a tag to SVG (needs `pip install Pillow`):
   `python3 tag_to_svg.py tagStandard52h13/tag52_13_00007.png tag52_13_00007.svg --size=20mm`
+- Rebuild every tag into `svg/` (loose files and the tracked archives; about
+  2.5 minutes, `--help` lists the options):
+  `python3 scripts/tags_to_svg.py`
+- Build another size outside the tracked archives:
+  `python3 scripts/tags_to_svg.py --cell=5mm --out <dir>`
+- Unpack one family's SVGs: `tar -xzf svg/tag36h11.tar.gz -C svg`
 - Rescale a tag with ImageMagick:
   `convert <small_marker>.png -scale <percent>% <big_marker>.png`
 - Check for non-ASCII text outside the README files:
@@ -61,7 +81,8 @@ attribution. They override any skill step that conflicts with them.
   Michigan copyright notice. Keep it byte-identical: never replace it, never
   add or remove a holder, and never let `repo-docs` treat it as residue. Its
   first condition requires keeping the notice in every redistribution.
-- The fork's own additions (agent files, skills, docs) are offered under the
+- The fork's own additions (agent files, skills, docs, `scripts/`, and the
+  `svg/` archives generated from the upstream images) are offered under the
   same BSD-2-Clause terms. Do not add another license file or notice without
   an explicit opt-in from the maintainer.
 - Leave the upstream content as it is: the `tag<Family>/` directories and

@@ -185,3 +185,5 @@ ros2_ws/
 *.bag.active
 
 # Project-local
+# Loose SVGs from scripts/tags_to_svg.py; the svg/<family>.tar.gz archives stay tracked.
+/svg/*/

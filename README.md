@@ -36,7 +36,8 @@ generate your own layouts or images of tags with
 [AprilTag-generation](https://github.com/AprilRobotics/apriltag-generation).
 This fork adds one tool-neutral set of agent instructions (`AGENTS.md`) and
 skills (`.agents/skills`), so any AI coding agent can work in the repository
-with the same rules.
+with the same rules. It also ships every tag as SVG, packed per family in
+`svg/` and built by `scripts/tags_to_svg.py`.
 
 ## ✨ Highlights
 
@@ -44,6 +45,8 @@ with the same rules.
   plus a mosaic and a PostScript sheet for each family.
 - 📐 **Print at any size**: `tag_to_svg.py` turns a tag into an SVG with a
   physical size.
+- 🗜️ **Every tag as SVG**: `svg/<Family>.tar.gz` holds all 159,428 tags as
+  SVGs at 2 mm per tag pixel, about 17 MiB in total.
 - 🤖 **Agent-ready**: `AGENTS.md` and 15 skills for git, docs, and setup
   work, with Claude Code adapters included.
 - 🛡️ **Upstream intact**: images, script, and BSD-2-Clause license are
@@ -51,20 +54,25 @@ with the same rules.
 
 ## 📦 Tag Families
 
-| Directory | Tags | Tag image (px) |
-|---|---|---|
-| `tag16h5` | 30 | 8 x 8 |
-| `tag25h9` | 35 | 9 x 9 |
-| `tag36h11` | 587 | 10 x 10 |
-| `tagCircle21h7` | 38 | 9 x 9 |
-| `tagCircle49h12` | 65,698 | 11 x 11 |
-| `tagCustom48h12` | 42,211 | 10 x 10 |
-| `tagStandard41h12` | 2,115 | 9 x 9 |
-| `tagStandard52h13` | 48,714 | 10 x 10 |
+| Directory | Tags | Tag image (px) | SVG edge |
+|---|---|---|---|
+| `tag16h5` | 30 | 8 x 8 | 16 mm |
+| `tag25h9` | 35 | 9 x 9 | 18 mm |
+| `tag36h11` | 587 | 10 x 10 | 20 mm |
+| `tagCircle21h7` | 38 | 9 x 9 | 18 mm |
+| `tagCircle49h12` | 65,698 | 11 x 11 | 22 mm |
+| `tagCustom48h12` | 42,211 | 10 x 10 | 20 mm |
+| `tagStandard41h12` | 2,115 | 9 x 9 | 18 mm |
+| `tagStandard52h13` | 48,714 | 10 x 10 | 20 mm |
 
 Each tag is one file named `tag<bits>_<hamming>_<id>.png`, for example
 `tag36h11/tag36_11_00000.png`. Each directory also holds `mosaic.png` and
 `alltags.ps`.
+
+The SVG edge column is the size of every tag in `svg/<Family>.tar.gz`
+(2 mm per tag pixel; entries `<Family>/<name>.svg`).
+`scripts/tags_to_svg.py` builds the archives from the PNGs with
+`tag_to_svg.py`; the unpacked `svg/<Family>/` directories are git-ignored.
 
 ## 🚀 Quick Start
 
@@ -84,6 +92,16 @@ Each tag is one file named `tag<bits>_<hamming>_<id>.png`, for example
 3. Or create an SVG (Scalable Vector Graphics) version of a tag:
    ```bash
    python3 tag_to_svg.py tagStandard52h13/tag52_13_00007.png tag52_13_00007.svg --size=20mm
+   ```
+4. Or unpack a whole family of ready-made SVGs (`tar` also ships with
+   Windows 10 and later):
+   ```bash
+   tar -xzf svg/tag36h11.tar.gz -C svg
+   ```
+5. To build every tag at another size, write to a directory of your own, so
+   the tracked 2 mm archives in `svg/` stay as they are (about 2.5 minutes):
+   ```bash
+   python3 scripts/tags_to_svg.py --cell=5mm --out <your_dir>
    ```
 
 <details>
@@ -145,6 +163,7 @@ copy and review the diff.
 | Commit format, workflow variants, branch naming, tags | [`.gitmessage`](.gitmessage) |
 | Each skill's procedure and rules | [`.agents/skills/<name>/SKILL.md`](.agents/skills) |
 | SVG converter options | `python3 tag_to_svg.py --help` |
+| Batch SVG converter options | `python3 scripts/tags_to_svg.py --help` |
 
 ## 🤝 Contributing
 
@@ -164,7 +183,8 @@ requests about this fork's additions are welcome here; commit messages follow
 
 - **License**: [BSD 2-Clause](LICENSE), Copyright (c) 2013-2016, The Regents
   of The University of Michigan. The fork's additions (agent instructions,
-  skills, and docs) are offered under the same terms.
+  skills, docs, the batch SVG script, and the SVG archives) are offered
+  under the same terms.
 - **Affiliation**: an unofficial fork. Upstream names appear only to identify
   the original project and imply no endorsement.
 

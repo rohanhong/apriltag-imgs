@@ -26,29 +26,32 @@
 > [!IMPORTANT]
 > 本仓库是 [AprilRobotics/apriltag-imgs](https://github.com/AprilRobotics/apriltag-imgs) 的非官方复刻，与密歇根大学（University of Michigan）、APRIL 机器人实验室（APRIL Robotics Laboratory）及上游维护者均无关联，也未获其认可。标签图像和 `tag_to_svg.py` 与上游完全一致。
 
-本仓库收录全部预生成 [AprilTag 3](https://github.com/AprilRobotics/apriltag) 标签族中每个标签的图像。如需自定义布局或标签图像，可使用 [AprilTag-generation](https://github.com/AprilRobotics/apriltag-generation) 自行生成。本复刻额外提供一套与具体工具无关的智能体指令（`AGENTS.md`）和技能（`.agents/skills`），任何 AI 编程智能体都能按同一套规则在本仓库中工作。
+本仓库收录全部预生成 [AprilTag 3](https://github.com/AprilRobotics/apriltag) 标签族中每个标签的图像。如需自定义布局或标签图像，可使用 [AprilTag-generation](https://github.com/AprilRobotics/apriltag-generation) 自行生成。本复刻额外提供一套与具体工具无关的智能体指令（`AGENTS.md`）和技能（`.agents/skills`），任何 AI 编程智能体都能按同一套规则在本仓库中工作。本复刻还以 SVG 形式提供全部标签，按标签族打包在 `svg/` 中，由 `scripts/tags_to_svg.py` 生成。
 
 ## ✨ 亮点
 
 - 🖼️ **涵盖全部预生成标签族**：八个标签族，约 159,000 张标签 PNG，每个标签族另附一张拼图和一份 PostScript 图纸。
 - 📐 **按任意尺寸打印**：`tag_to_svg.py` 可将标签转换为带物理尺寸的 SVG。
+- 🗜️ **全部标签的 SVG 版本**：`svg/<Family>.tar.gz` 以每个标签像素 2 mm 的尺寸收录全部 159,428 个标签的 SVG，合计约 17 MiB。
 - 🤖 **面向智能体**：`AGENTS.md` 加 15 个技能，覆盖 git、文档和环境配置工作，并附带 Claude Code 适配器。
 - 🛡️ **上游内容不变**：图像、脚本和 BSD-2-Clause 许可证均保持原样，本复刻通过普通合并与上游同步。
 
 ## 📦 标签族
 
-| 目录 | 标签数 | 标签图像（像素） |
-|---|---|---|
-| `tag16h5` | 30 | 8 x 8 |
-| `tag25h9` | 35 | 9 x 9 |
-| `tag36h11` | 587 | 10 x 10 |
-| `tagCircle21h7` | 38 | 9 x 9 |
-| `tagCircle49h12` | 65,698 | 11 x 11 |
-| `tagCustom48h12` | 42,211 | 10 x 10 |
-| `tagStandard41h12` | 2,115 | 9 x 9 |
-| `tagStandard52h13` | 48,714 | 10 x 10 |
+| 目录 | 标签数 | 标签图像（像素） | SVG 边长 |
+|---|---|---|---|
+| `tag16h5` | 30 | 8 x 8 | 16 mm |
+| `tag25h9` | 35 | 9 x 9 | 18 mm |
+| `tag36h11` | 587 | 10 x 10 | 20 mm |
+| `tagCircle21h7` | 38 | 9 x 9 | 18 mm |
+| `tagCircle49h12` | 65,698 | 11 x 11 | 22 mm |
+| `tagCustom48h12` | 42,211 | 10 x 10 | 20 mm |
+| `tagStandard41h12` | 2,115 | 9 x 9 | 18 mm |
+| `tagStandard52h13` | 48,714 | 10 x 10 | 20 mm |
 
 每个标签对应一个文件，命名为 `tag<bits>_<hamming>_<id>.png`，例如 `tag36h11/tag36_11_00000.png`。每个目录还包含 `mosaic.png` 和 `alltags.ps`。
+
+“SVG 边长”一列是 `svg/<Family>.tar.gz` 中每个标签的尺寸（每个标签像素 2 mm；条目为 `<Family>/<name>.svg`）。`scripts/tags_to_svg.py` 用 `tag_to_svg.py` 从 PNG 生成这些压缩包；解压出的 `svg/<Family>/` 目录已被 git 忽略。
 
 ## 🚀 快速开始
 
@@ -66,6 +69,14 @@
 3. 或者生成标签的 SVG（可缩放矢量图形）版本：
    ```bash
    python3 tag_to_svg.py tagStandard52h13/tag52_13_00007.png tag52_13_00007.svg --size=20mm
+   ```
+4. 或者解压一整个标签族的现成 SVG（Windows 10 及更高版本也自带 `tar`）：
+   ```bash
+   tar -xzf svg/tag36h11.tar.gz -C svg
+   ```
+5. 如需以其他尺寸生成全部标签，请输出到你自己的目录，以免改动 `svg/` 中受 git 跟踪的 2 mm 压缩包（约 2.5 分钟）：
+   ```bash
+   python3 scripts/tags_to_svg.py --cell=5mm --out <your_dir>
    ```
 
 <details>
@@ -121,6 +132,7 @@ git merge upstream/master   # or run the git-merge skill with source upstream/ma
 | 提交格式、工作流变体、分支命名、标签 | [`.gitmessage`](../../.gitmessage) |
 | 每个技能的流程与规则 | [`.agents/skills/<name>/SKILL.md`](../../.agents/skills) |
 | SVG 转换器选项 | `python3 tag_to_svg.py --help` |
+| 批量 SVG 转换器选项 | `python3 scripts/tags_to_svg.py --help` |
 
 ## 🤝 参与贡献
 
@@ -136,7 +148,7 @@ git merge upstream/master   # or run the git-merge skill with source upstream/ma
 
 ## ⚖️ 法律信息
 
-- **许可证**：[BSD 2-Clause](../../LICENSE)，Copyright (c) 2013-2016, The Regents of The University of Michigan。本复刻新增的内容（智能体指令、技能和文档）按相同条款提供。
+- **许可证**：[BSD 2-Clause](../../LICENSE)，Copyright (c) 2013-2016, The Regents of The University of Michigan。本复刻新增的内容（智能体指令、技能、文档、批量 SVG 脚本和 SVG 压缩包）按相同条款提供。
 - **关联声明**：本仓库是非官方复刻。文中出现的上游名称仅用于指明原始项目，不表示任何认可。
 
 ## ⭐ Star 历史
