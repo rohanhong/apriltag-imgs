@@ -33,6 +33,10 @@ There is no build and no test suite.
 
 - Commits and branching follow `.gitmessage` (see its `Workflow:` and
   `Adopted:` lines).
+- The trunk is `master`, as upstream names it, on origin and locally. The
+  skills and `.gitmessage` say `main`: read every `main` there as `master`,
+  with the same rules (see the Trunk name note in `.gitmessage`). Never
+  create a `main` branch.
 - Use the git-* skills for git operations. `.gitmessage` is normative for
   the repository's commit and merge messages;
   `.agents/skills/git-commit/references/message-spec.md` is the skills'

@@ -13,7 +13,7 @@
 <p>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/rohanhong/apriltag-imgs"></a>
   <a href="https://github.com/AprilRobotics/apriltag-imgs"><img alt="Fork of" src="https://img.shields.io/badge/fork%20of-AprilRobotics%2Fapriltag--imgs-lightgrey?logo=github"></a>
-  <a href="https://github.com/rohanhong/apriltag-imgs/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/rohanhong/apriltag-imgs"></a>
+  <a href="https://github.com/rohanhong/apriltag-imgs/commits/master"><img alt="Last commit" src="https://img.shields.io/github/last-commit/rohanhong/apriltag-imgs"></a>
   <a href="https://github.com/rohanhong/apriltag-imgs/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/rohanhong/apriltag-imgs?style=flat"></a>
   <a href="https://agents.md"><img alt="AGENTS.md" src="https://img.shields.io/badge/AGENTS.md-ready-24292f"></a>
   <a href="https://agentskills.io"><img alt="Agent Skills" src="https://img.shields.io/badge/Agent%20Skills-open%20format-8250df"></a>

@@ -85,6 +85,12 @@
 #
 #   Workflow: trunk-solo
 #
+#   Trunk name: this repository keeps the upstream trunk name
+#   `master`. Read every `main` in this file and in the skills
+#   as `master`, with the same rules: the same protections, the
+#   same ban on force push and history rewrite, and never
+#   deleted. There is no `main` branch here.
+#
 #   git-flow     - `main` plus `develop` trunks; all work lands
 #                  through short-lived branches and a reviewed
 #                  PR or MR. Protected: `main`, `develop`,
