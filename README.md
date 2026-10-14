@@ -8,7 +8,7 @@
 
 <h1>🏷️ AprilTag-imgs (fork)</h1>
 
-<p><b>Pre-generated images of every AprilTag 3 tag family, ready for AI coding agents</b></p>
+<p><b>Every AprilTag 3 tag as PNG and SVG, with instructions and skills for AI coding agents</b></p>
 
 <p>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/rohanhong/apriltag-imgs"></a>

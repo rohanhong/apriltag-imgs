@@ -10,8 +10,9 @@
 repository:
   # At most 350 characters. Mirrors the README tagline.
   description: >-
-    Unofficial fork of AprilRobotics/apriltag-imgs: pre-generated images of
-    every AprilTag 3 tag family, ready for AI coding agents.
+    Unofficial fork of AprilRobotics/apriltag-imgs that adds SVG versions of
+    every tag and AI agent instructions and skills to the pre-generated
+    AprilTag 3 tag images.
 
   # Project website; empty when there is none.
   homepage: ""

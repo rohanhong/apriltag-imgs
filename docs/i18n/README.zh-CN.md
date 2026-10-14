@@ -8,7 +8,7 @@
 
 <h1>🏷️ AprilTag-imgs（复刻）</h1>
 
-<p><b>全部 AprilTag 3 标签族的预生成图像，可直接交给 AI 编程智能体使用</b></p>
+<p><b>全部 AprilTag 3 标签的 PNG 与 SVG 版本，附带面向 AI 编程智能体的指令和技能</b></p>
 
 <p>
   <a href="../../LICENSE"><img alt="License" src="https://img.shields.io/github/license/rohanhong/apriltag-imgs"></a>
